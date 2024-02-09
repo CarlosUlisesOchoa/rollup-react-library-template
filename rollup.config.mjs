@@ -38,12 +38,19 @@ export default [
       postcss({
         modules: true,
         extensions: ['.css'],
-        // extract: true, // extracts to `${basename(dest)}.css`
+        // extract: true, // TODO: Investigate about this option
         plugins: [autoprefixer()],
         writeDefinitions: true,
         // modules: { ... }
       }),
-      terser(),
+      terser({
+        // This is the configuration for the terser plugin (minification of the js bundle)
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log'], // Remove console.log statements
+        },
+      }),
     ],
   },
   {
