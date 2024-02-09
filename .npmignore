@@ -13,6 +13,7 @@ storybook-utils.*
 pnpm-lock.yaml
 postcss.config.js
 tsconfig.json
+tsconfig.build.json
 vite.config.ts
 storybook-static
 .eslintignore
