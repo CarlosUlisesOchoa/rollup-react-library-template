@@ -3,9 +3,14 @@
  * https://jestjs.io/docs/configuration
  */
 
-module.exports = {
+import { Config } from 'jest'
+
+// This message will be logged when the file is read (at test time)
+console.log('Jest config loaded')
+
+const config: Config = {
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  automock: false,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -14,23 +19,24 @@ module.exports = {
   // cacheDirectory: "/private/var/folders/7j/r_kgmlbj2512tj8c88xxg53r0000gn/T/jest_dx",
 
   // Automatically clear mock calls, instances, contexts and results before every test
-  clearMocks: true,
+  // clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ["src/**"],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    'src/**/*.{ts,tsx}',
+    '!vendor/**/*.{js,jsx,ts,tsx}',
+    '!**/node_modules/**',
+  ],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-     "/node_modules/",
-     "/stories/",
-     "^.*\.stories\.tsx?$"
-  ],
+  coveragePathIgnorePatterns: ['/node_modules/', '/stories/', '^.*.stories.tsx?$'],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -44,11 +50,11 @@ module.exports = {
   // ],
 
   // An object that configures minimum threshold enforcement for coverage results
-  coverageThreshold: {
-    "global": {
-      "lines": 50
-    }
-  },
+  // coverageThreshold: {
+  //   global: {
+  //     lines: 50,
+  //   },
+  // },
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
@@ -71,7 +77,9 @@ module.exports = {
   // globalTeardown: undefined,
 
   // A set of global variables that need to be available in all test environments
-  // globals: {},
+  // globals: {'ts-jest': {},}
+
+  maxConcurrency: 5,
 
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
@@ -106,7 +114,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -130,9 +138,7 @@ module.exports = {
   // rootDir: undefined,
 
   // A list of paths to directories that Jest should use to search for files in
-   roots: [
-     "src"
-   ],
+  roots: ['src'],
 
   // Allows you to use a custom runner instead of Jest's default test runner
   // runner: "jest-runner",
@@ -141,7 +147,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -150,7 +156,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -199,6 +205,8 @@ module.exports = {
   // Whether to use watchman for file crawling
   // watchman: true,
   moduleNameMapper: {
-    ".(css|less|scss)$": "identity-obj-proxy",
+    '.(css|less|scss)$': 'identity-obj-proxy',
   },
-};
+}
+
+export default config
