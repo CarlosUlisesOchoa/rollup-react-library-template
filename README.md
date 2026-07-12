@@ -51,3 +51,7 @@ npm publish
 ## License
 
 [MIT](LICENSE).
+
+## About developer
+
+Visit my web [Carlos Ochoa](https://carlos8a.com?ref=gh)
